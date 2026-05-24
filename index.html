@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYDROS - Underwater Life Support Station</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #040d18;
+            --teal: #1D9E75;
+            --deep-blue: #185FA5;
+            --light-blue: #378ADD;
+            --text-light: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .stat-number, .spec-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(4, 13, 24, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(29, 158, 117, 0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--teal);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--teal);
+            border-radius: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(29, 158, 117, 0.5), rgba(29, 158, 117, 0.1));
+            border-radius: 50%;
+            opacity: 0;
+            animation: float-up 10s infinite ease-in;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(29, 158, 117, 0.6);
+            letter-spacing: 3px;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: var(--light-blue);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-meta {
+            font-size: 0.95rem;
+            color: var(--teal);
+            opacity: 0.8;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+                opacity: 1;
+            }
+        }
+
+        .scroll-arrow svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--teal);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--teal);
+            text-align: center;
+        }
+
+        /* Overview */
+        .overview-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.1), rgba(24, 95, 165, 0.1));
+            border: 1px solid rgba(29, 158, 117, 0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 20px rgba(29, 158, 117, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Flow Cards */
+        .flow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flow-card {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.05), rgba(24, 95, 165, 0.05));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .flow-card:hover {
+            border-color: var(--teal);
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.15), rgba(24, 95, 165, 0.15));
+            box-shadow: 0 0 20px rgba(29, 158, 117, 0.2);
+        }
+
+        .flow-card:hover::before {
+            opacity: 1;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .flow-number {
+            width: 40px;
+            height: 40px;
+            background: var(--teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+            color: var(--dark-bg);
+            flex-shrink: 0;
+        }
+
+        .flow-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            color: var(--teal);
+        }
+
+        .flow-law {
+            font-size: 0.85rem;
+            color: var(--light-blue);
+            margin-bottom: 0.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .flow-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .flow-card.expanded .flow-description {
+            display: block;
+        }
+
+        /* Specs Table */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .specs-table th {
+            background: linear-gradient(90deg, rgba(29, 158, 117, 0.2), rgba(24, 95, 165, 0.2));
+            border: 1px solid rgba(29, 158, 117, 0.3);
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--teal);
+        }
+
+        .specs-table td {
+            border: 1px solid rgba(29, 158, 117, 0.1);
+            padding: 1rem;
+            background: rgba(29, 158, 117, 0.02);
+        }
+
+        .specs-table tr:hover td {
+            background: rgba(29, 158, 117, 0.08);
+        }
+
+        .spec-value {
+            color: var(--light-blue);
+        }
+
+        /* Component Grid */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .component-card {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.08), rgba(24, 95, 165, 0.08));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(29, 158, 117, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .component-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 30px rgba(29, 158, 117, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .component-card:hover::before {
+            opacity: 1;
+        }
+
+        .component-color {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .component-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--teal);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .component-material {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .component-dimension {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--light-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Laws Grid */
+        .laws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .law-card {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.08), rgba(24, 95, 165, 0.08));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 300px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .law-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 30px rgba(29, 158, 117, 0.3);
+        }
+
+        .law-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .law-card.flipped .law-inner {
+            transform: rotateY(180deg);
+        }
+
+        .law-front, .law-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .law-back {
+            transform: rotateY(180deg);
+        }
+
+        .law-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .law-governs {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .law-result {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--light-blue);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        .law-formula {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--teal);
+            word-break: break-word;
+        }
+
+        /* Simulations */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sim-card {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.08), rgba(24, 95, 165, 0.08));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .sim-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 30px rgba(29, 158, 117, 0.3);
+        }
+
+        .sim-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--teal);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sim-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(29, 158, 117, 0.1);
+        }
+
+        .sim-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .sim-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .sim-value {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--light-blue);
+            font-size: 0.95rem;
+        }
+
+        .sim-banner {
+            background: linear-gradient(90deg, rgba(29, 158, 117, 0.2), rgba(24, 95, 165, 0.2));
+            border-left: 3px solid var(--teal);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.08), rgba(24, 95, 165, 0.08));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 30px rgba(29, 158, 117, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--teal), var(--light-blue));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--dark-bg);
+        }
+
+        .team-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .team-role {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* References */
+        .references-accordion {
+            margin-top: 2rem;
+        }
+
+        .reference-item {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.05), rgba(24, 95, 165, 0.05));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .reference-header {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .reference-header:hover {
+            background: rgba(29, 158, 117, 0.1);
+        }
+
+        .reference-header.active {
+            background: rgba(29, 158, 117, 0.15);
+            color: var(--teal);
+        }
+
+        .reference-title {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .reference-toggle {
+            color: var(--teal);
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .reference-header.active .reference-toggle {
+            transform: rotate(180deg);
+        }
+
+        .reference-content {
+            display: none;
+            padding: 1rem;
+            background: rgba(29, 158, 117, 0.05);
+            border-top: 1px solid rgba(29, 158, 117, 0.2);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .reference-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(4, 13, 24, 0.8);
+            border-top: 1px solid rgba(29, 158, 117, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .footer-info {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--light-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--teal);
+        }
+
+        .footer-license {
+            border-top: 1px solid rgba(29, 158, 117, 0.2);
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">HYDROS</a>
+        <ul class="nav-links">
+            <li><a href="#overview" class="nav-link active">Overview</a></li>
+            <li><a href="#flow" class="nav-link">How It Works</a></li>
+            <li><a href="#specs" class="nav-link">Specs</a></li>
+            <li><a href="#components" class="nav-link">Components</a></li>
+            <li><a href="#laws" class="nav-link">Laws</a></li>
+            <li><a href="#simulations" class="nav-link">Simulations</a></li>
+            <li><a href="#team" class="nav-link">Team</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="bubble-container"></div>
+        <div class="hero-content">
+            <h1>HYDROS</h1>
+            <h2>Hyperbaric Underwater Dissolved Oxygen Respirant Station</h2>
+            <p>No tanks. No surface supply. Unlimited bottom time.</p>
+            <p class="hero-meta">NEMO Labs — May 2026</p>
+        </div>
+        <div class="scroll-arrow">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview">
+        <h2>System Overview</h2>
+        <p class="overview-text">
+            HYDROS is a fixed-depth underwater life support station that extracts dissolved oxygen directly from seawater and supplies it continuously to six divers at 20 metres depth. Seawater enters through three axial turbines at 1.5 m/s. A 3.47 m² polysulfone hollow-fiber membrane extracts dissolved oxygen passively using Henry's Law and Fick's Law. Exhaled CO₂ is neutralised by a Sodasorb soda lime scrubber in a closed breathing loop. Clean oxygen is stored in a 228-litre buffer tank and distributed to six divers through a manifold and umbilical hoses.
+        </p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">20</div>
+                <div class="stat-label">Operating Depth (m)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Divers Supported</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">109,800</div>
+                <div class="stat-label">Seawater Flow (L/min)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">73x</div>
+                <div class="stat-label">Hydraulic Safety Margin</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,251</div>
+                <div class="stat-label">Turbine Power (W)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">48.5</div>
+                <div class="stat-label">Scrubber Duration (hrs)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="flow">
+        <h2>How It Works</h2>
+        <div class="flow-container">
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div>
+                        <div class="flow-title">Seawater at 20m</div>
+                        <div class="flow-law">Henry's Law</div>
+                    </div>
+                </div>
+                <div class="flow-description">Dissolved O₂ concentration = 7.2 mg/L at operating depth due to increased hydrostatic pressure.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div>
+                        <div class="flow-title">Three Turbines</div>
+                        <div class="flow-law">Betz's Law</div>
+                    </div>
+                </div>
+                <div class="flow-description">Axial turbines draw seawater passively at 1.5 m/s, extracting power from natural current flow.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div>
+                        <div class="flow-title">Membrane Inlet</div>
+                        <div class="flow-law">Fluid Mechanics</div>
+                    </div>
+                </div>
+                <div class="flow-description">Seawater enters the hollow-fiber membrane vessel through inlet flange at high velocity.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div>
+                        <div class="flow-title">Turbulent Flow</div>
+                        <div class="flow-law">Reynolds Number</div>
+                    </div>
+                </div>
+                <div class="flow-description">Flow regime confirmed turbulent with Re = 1,006,500, maximizing O₂ contact with fiber bundle.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">5</div>
+                    <div>
+                        <div class="flow-title">O₂ Extraction</div>
+                        <div class="flow-law">Fick's First Law</div>
+                    </div>
+                </div>
+                <div class="flow-description">Dissolved O₂ migrates through polysulfone fiber wall via concentration gradient. 20% extracted per pass.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">6</div>
+                    <div>
+                        <div class="flow-title">Depleted Seawater</div>
+                        <div class="flow-law">Mass Balance</div>
+                    </div>
+                </div>
+                <div class="flow-description">80% of dissolved O₂ remains in seawater as it exits to ocean. No environmental impact.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">7</div>
+                    <div>
+                        <div class="flow-title">Gas Riser Pipe</div>
+                        <div class="flow-law">Buoyancy</div>
+                    </div>
+                </div>
+                <div class="flow-description">Extracted O₂ rises through vertical pipe to upper chambers via buoyancy and pressure difference.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">8</div>
+                    <div>
+                        <div class="flow-title">CO₂ Scrubber</div>
+                        <div class="flow-law">Dalton's Law</div>
+                    </div>
+                </div>
+                <div class="flow-description">Ca(OH)₂ + CO₂ → CaCO₃ + H₂O. Neutralises exhaled gas. Lasts 48.5 hours per charge.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">9</div>
+                    <div>
+                        <div class="flow-title">Buffer Tank</div>
+                        <div class="flow-law">Ideal Gas Law</div>
+                    </div>
+                </div>
+                <div class="flow-description">228-litre tank at 3 atm stores cleaned O₂. Provides steady pressure head to manifold.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">10</div>
+                    <div>
+                        <div class="flow-title">6-Port Manifold</div>
+                        <div class="flow-law">Fluid Distribution</div>
+                    </div>
+                </div>
+                <div class="flow-description">Gas distributor splits O₂ flow evenly among 6 umbilical hoses. 100mm header, 6×50mm ports.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">11</div>
+                    <div>
+                        <div class="flow-title">Umbilical Hoses</div>
+                        <div class="flow-law">Fluid Transport</div>
+                    </div>
+                </div>
+                <div class="flow-description">Six 50mm OD hoses deliver O₂ to each diver at 2,400mm length. Each diver breathes continuously.</div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step">
+                    <div class="flow-number">12</div>
+                    <div>
+                        <div class="flow-title">Closed Loop</div>
+                        <div class="flow-law">Conservation</div>
+                    </div>
+                </div>
+                <div class="flow-description">Exhaled gas returns via second channel to CO₂ scrubber. No waste. Zero escape. Perfect cycle.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications -->
+    <section id="specs">
+        <h2>Key Specifications</h2>
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Operating depth</td>
+                    <td class="spec-value">20 m</td>
+                </tr>
+                <tr>
+                    <td>Hydrostatic pressure</td>
+                    <td class="spec-value">201,105 Pa (2.0 atm)</td>
+                </tr>
+                <tr>
+                    <td>Dissolved O₂ at depth</td>
+                    <td class="spec-value">7.2 mg/L</td>
+                </tr>
+                <tr>
+                    <td>Membrane surface area</td>
+                    <td class="spec-value">3.47 m²</td>
+                </tr>
+                <tr>
+                    <td>Extraction efficiency</td>
+                    <td class="spec-value">20% per pass</td>
+                </tr>
+                <tr>
+                    <td>Seawater flow minimum</td>
+                    <td class="spec-value">1,493 L/min</td>
+                </tr>
+                <tr>
+                    <td>Seawater flow actual</td>
+                    <td class="spec-value">109,800 L/min</td>
+                </tr>
+                <tr>
+                    <td>Hydraulic safety margin</td>
+                    <td class="spec-value">73x</td>
+                </tr>
+                <tr>
+                    <td>Reynolds number</td>
+                    <td class="spec-value">1,006,500</td>
+                </tr>
+                <tr>
+                    <td>Turbine power Betz</td>
+                    <td class="spec-value">1,251 W</td>
+                </tr>
+                <tr>
+                    <td>Turbine power practical</td>
+                    <td class="spec-value">450–500 W</td>
+                </tr>
+                <tr>
+                    <td>Frame safety factor</td>
+                    <td class="spec-value">3.32</td>
+                </tr>
+                <tr>
+                    <td>CO₂ scrubber duration</td>
+                    <td class="spec-value">48.5 hours</td>
+                </tr>
+                <tr>
+                    <td>Emergency O₂ reserve</td>
+                    <td class="spec-value">34 minutes for 6 divers</td>
+                </tr>
+                <tr>
+                    <td>Total station mass</td>
+                    <td class="spec-value">2,346 kg</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Components -->
+    <section id="components">
+        <h2>9 Component Layers</h2>
+        <div class="components-grid">
+            <div class="component-card">
+                <span class="component-color" style="background-color: #fff;"></span>
+                <strong>FRAME</strong>
+                <div class="component-name">ASTM A36 Steel Cage</div>
+                <div class="component-material">Steel</div>
+                <div class="component-dimension">4.0 × 3.0 × 2.0 m</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #FFD700;"></span>
+                <strong>MEMBRANE</strong>
+                <div class="component-name">Polysulfone Hollow-Fiber</div>
+                <div class="component-material">Polysulfone</div>
+                <div class="component-dimension">700mm OD × 3000mm L</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #00C851;"></span>
+                <strong>SCRUBBER</strong>
+                <div class="component-name">CO₂ Soda Lime</div>
+                <div class="component-material">Calcium Hydroxide</div>
+                <div class="component-dimension">360mm OD × 600mm H</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #ff4081;"></span>
+                <strong>BUFFER</strong>
+                <div class="component-name">O₂ Pressure Tank</div>
+                <div class="component-material">Stainless Steel</div>
+                <div class="component-dimension">360mm OD × 2000mm L</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #ff0000;"></span>
+                <strong>MANIFOLD</strong>
+                <div class="component-name">6-Diver Distributor</div>
+                <div class="component-material">Brass/Stainless</div>
+                <div class="component-dimension">100mm header × 6×50mm ports</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #0066ff;"></span>
+                <strong>HOSE</strong>
+                <div class="component-name">Umbilical (×6)</div>
+                <div class="component-material">Reinforced Rubber</div>
+                <div class="component-dimension">50mm OD × 2400mm each</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #00ffff;"></span>
+                <strong>TURBINE</strong>
+                <div class="component-name">Axial Flow (×3)</div>
+                <div class="component-material">Aluminum/Composite</div>
+                <div class="component-dimension">760mm span × 25° pitch</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #ff6600;"></span>
+                <strong>EMERGENCY</strong>
+                <div class="component-name">Backup O₂ Tanks (×2)</div>
+                <div class="component-material">Steel</div>
+                <div class="component-dimension">160mm OD × 207 bar</div>
+            </div>
+
+            <div class="component-card">
+                <span class="component-color" style="background-color: #87CEEB;"></span>
+                <strong>BALLOON</strong>
+                <div class="component-name">Buoyancy Sphere</div>
+                <div class="component-material">Composite</div>
+                <div class="component-dimension">1700mm diameter</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Governing Laws -->
+    <section id="laws">
+        <h2>Governing Physics Laws</h2>
+        <div class="laws-grid">
+            <div class="law-card">
+                <div class="law-inner">
+                    <div class="law-front">
+                        <div class="law-name">Henry's Law</div>
+                        <div class="law-governs">Dissolved O₂ Concentration</div>
+                        <div class="law-result">7.2 mg/L at 20m depth</div>
+                    </div>
+                    <div class="law-back">
+                        <div class="law-formula">C = kH × P</div>
+                        <div class="law-governs" style="margin-top: 1rem;">Concentration proportional to partial pressure above solution</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="law-card">
+                <div class="law-inner">
+                    <div class="law-front">
+                        <div class="law-name">Fick's First Law</div>
+                        <div class="law-governs">O₂ Flux Through Membrane</div>
+                        <div class="law-result">3.47 m² area required</div>
+                    </div>
+                    <div class="law-back">
+                        <div class="law-formula">J = -D × (dC/dx)</div>
+                        <div class="law-governs" style="margin-top: 1rem;">Diffusion driven by concentration gradient</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="law-card">
+                <div class="law-inner">
+                    <div class="law-front">
+                        <div class="law-name">Dalton's Law</div>
+                        <div class="law-governs">CO₂ Partial Pressure Safety</div>
+                        <div class="law-result">pCO₂ below 500 Pa</div>
+                    </div>
+                    <div class="law-back">
+                        <div class="law-formula">P_total = ΣP_i</div>
+                        <div class="law-governs" style="margin-top: 1rem;">Total pressure = sum of individual gas pressures</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="law-card">
+                <div class="law-inner">
+                    <div class="law-front">
+                        <div class="law-name">Reynolds Number</div>
+                        <div class="law-governs">Flow Regime</div>
+                        <div class="law-result">Re = 1,006,500 (turbulent)</div>
+                    </div>
+                    <div class="law-back">
+                        <div class="law-formula">Re = ρVD/μ</div>
+                        <div class="law-governs" style="margin-top: 1rem;">Predicts laminar vs turbulent flow behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="law-card">
+                <div class="law-inner">
+                    <div class="law-front">
+                        <div class="law-name">Betz's Law</div>
+                        <div class="law-governs">Turbine Power Extraction</div>
+                        <div class="law-result">1,251 W theoretical</div>
+                    </div>
+                    <div class="law-back">
+                        <div class="law-formula">P_max = 16/27 × 0.5ρAV³</div>
+                        <div class="law-governs" style="margin-top: 1rem;">Max power extractable from flowing fluid</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="law-card">
+                <div class="law-inner">
+                    <div class="law-front">
+                        <div class="law-name">Archimedes Principle</div>
+                        <div class="law-governs">Buoyancy & Mooring</div>
+                        <div class="law-result">Cord safety factor = 113</div>
+                    </div>
+                    <div class="law-back">
+                        <div class="law-formula">F_b = ρ × g × V</div>
+                        <div class="law-governs" style="margin-top: 1rem;">Buoyant force = weight of displaced fluid</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulations -->
+    <section id="simulations">
+        <h2>Simulation & Validation</h2>
+        <div class="sim-grid">
+            <div class="sim-card">
+                <div class="sim-title">SimScale CFD</div>
+                <div class="sim-item">
+                    <div class="sim-label">Seawater Flow Analysis</div>
+                    <div class="sim-value">RANS k-ω SST Model</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Velocity Range</div>
+                    <div class="sim-value">1.42–1.61 m/s</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Reynolds Number</div>
+                    <div class="sim-value">1,006,500 ✓</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Deviation from Manual</div>
+                    <div class="sim-value">2.3%</div>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-title">SimScale FEA</div>
+                <div class="sim-item">
+                    <div class="sim-label">Frame Stress Analysis</div>
+                    <div class="sim-value">Linear Static</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Maximum Stress</div>
+                    <div class="sim-value">78.1 MPa</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Safety Factor</div>
+                    <div class="sim-value">3.20</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Deviation from Manual</div>
+                    <div class="sim-value">3.7%</div>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-title">PhET Gas Properties</div>
+                <div class="sim-item">
+                    <div class="sim-label">O₂ Partial Pressure</div>
+                    <div class="sim-value">42,000 Pa ✓</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">CO₂ Risk</div>
+                    <div class="sim-value">Visualised & Safe</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Validation</div>
+                    <div class="sim-value">Visual Match</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Status</div>
+                    <div class="sim-value">Confirmed</div>
+                </div>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-title">PhET Buoyancy</div>
+                <div class="sim-item">
+                    <div class="sim-label">Net Upward Force</div>
+                    <div class="sim-value">2,820 N</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Mooring Safety Factor</div>
+                    <div class="sim-value">113</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Deviation from Manual</div>
+                    <div class="sim-value">0.14%</div>
+                </div>
+                <div class="sim-item">
+                    <div class="sim-label">Status</div>
+                    <div class="sim-value">Verified</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sim-banner">
+            <strong>✓ All simulations agree with manual calculations within 3.7% deviation</strong>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team">
+        <h2>The Team</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">FA</div>
+                <div class="team-name">Ryan Andrei F. Famaran</div>
+                <div class="team-role">Lead Systems Engineer</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">SJ</div>
+                <div class="team-name">Sean Jhaydele H. Cordova</div>
+                <div class="team-role">Systems Designer</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">JI</div>
+                <div class="team-name">John Ivan C. Manabat</div>
+                <div class="team-role">Structural Analyst</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">MK</div>
+                <div class="team-name">Mackenzie N. Ancheta</div>
+                <div class="team-role">Simulation & Validation</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3 style="color: var(--teal); margin-bottom: 0.5rem;">NEMO Labs</h3>
+            <p style="color: var(--text-muted);">May 2026</p>
+        </div>
+    </section>
+
+    <!-- References -->
+    <section>
+        <h2>References</h2>
+        <div class="references-accordion">
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Ahmed et al. (2004) — Oxygen transfer characteristics of hollow-fiber composite membranes</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Ahmed et al.</strong> (2004). Oxygen transfer characteristics of hollow-fiber composite membranes. <em>Advances in Environmental Research</em>, 8(3), 313-323.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Betz, A. (1926) — Wind-energie und ihre Ausnutzung durch Windmühlen</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Betz, A.</strong> (1926). <em>Wind-energie und ihre Ausnutzung durch Windmühlen</em>. Vandenhoeck & Ruprecht, Göttingen.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Garcia & Gordon (1992) — Oxygen solubility in seawater</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Garcia, H. E., & Gordon, L. I.</strong> (1992). Oxygen solubility in seawater: better fitting equations. <em>Limnology and Oceanography</em>, 37(6), 1307-1312.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Lee et al. (2018) — Theoretical model for underwater oxygen extraction</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Lee, S., Park, J., & Kim, H.</strong> (2018). Theoretical model for underwater oxygen extraction using hollow-fiber membranes. <em>Scientific Reports</em>, 8, 12847.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Lim et al. (2020) — CO2 absorbents in closed-circuit diving rebreathers</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Lim, P., Mitchell, S. J., & Doolette, D. J.</strong> (2020). CO₂ absorbents in closed-circuit diving rebreathers: a review. <em>Diving and Hyperbaric Medicine</em>, 50(2), 137-145.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Merckelbach et al. (2025) — Artificial gill membranes for underwater fuel cells</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Merckelbach, L. M., Wu, C., & Chen, X.</strong> (2025). Artificial gill membranes for underwater fuel cells and life support systems. <em>Advanced Science</em>, 12(1), 2400892.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Pleil et al. (2021) — The physics of human breathing</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Pleil, J. D., Stiegel, M. A., & Sobus, J. R.</strong> (2021). The physics of human breathing: ventilation, gas exchange, and respiratory mechanics. <em>Journal of Breath Research</em>, 15(4), 043001.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">Sander, S. P. (2023) — Henry's law constants for water as solvent</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Sander, S. P.</strong> (2023). Henry's law constants for water as solvent. <em>Atmospheric Chemistry and Physics</em>, 23, 10753-10806.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">White, F. M. (2011) — Fluid Mechanics, 7th Edition</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>White, F. M.</strong> (2011). <em>Fluid Mechanics</em> (7th ed.). McGraw-Hill Education.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">ASME (2019) — Boiler and Pressure Vessel Code Section VIII</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>American Society of Mechanical Engineers (ASME).</strong> (2019). <em>Boiler and Pressure Vessel Code, Section VIII: Pressure Vessels</em> (2019 Edition). ASME.
+                </div>
+            </div>
+
+            <div class="reference-item">
+                <div class="reference-header" onclick="toggleReference(this)">
+                    <span class="reference-title">WHOI (2010) — Mooring Systems Engineering Guide</span>
+                    <span class="reference-toggle">▼</span>
+                </div>
+                <div class="reference-content">
+                    <strong>Woods Hole Oceanographic Institution (WHOI).</strong> (2010). <em>Mooring Systems Engineering Guide</em>. WHOI Technical Report 10-001.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title">HYDROS</div>
+            <div class="footer-info">Hyperbaric Underwater Dissolved Oxygen Respirant Station</div>
+            <div class="footer-links">
+                <a href="https://github.com/sxennn/HYDROS" target="_blank">GitHub Repository</a>
+                <a href="#overview">Back to Top</a>
+            </div>
+            <div class="footer-license">
+                © 2026 NEMO Labs. Academic and research use only. Non-commercial education license.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate bubbles
+        function generateBubbles() {
+            const container = document.getElementById('bubble-container');
+            const bubbleCount = 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 100 + 50;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = left + '%';
+                bubble.style.animationDelay = delay + 's';
+                
+                container.appendChild(bubble);
+            }
+        }
+
+        // Navbar scroll detection
+        function updateNavbar() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const id = section.getAttribute('id');
+                
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Animate stat counters
+        function animateCounter(element, target) {
+            const duration = 2000;
+            const start = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - start;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                let value = target * progress;
+                
+                // Format with commas
+                if (target > 100) {
+                    value = Math.floor(value);
+                    element.textContent = value.toLocaleString();
+                } else {
+                    value = (value).toFixed(1);
+                    element.textContent = value;
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            update();
+        }
+
+        // Intersection observer for stat animations
+        function observeStats() {
+            const statCards = document.querySelectorAll('.stat-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.animated) {
+                        const numberElement = entry.target.querySelector('.stat-number');
+                        const text = numberElement.textContent.replace(/,/g, '');
+                        let target = parseFloat(text);
+                        
+                        animateCounter(numberElement, target);
+                        entry.target.dataset.animated = 'true';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statCards.forEach(card => observer.observe(card));
+        }
+
+        // Flow card expand/collapse
+        function setupFlowCards() {
+            const flowCards = document.querySelectorAll('.flow-card');
+            
+            flowCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+        }
+
+        // Law card flip
+        function setupLawCards() {
+            const lawCards = document.querySelectorAll('.law-card');
+            
+            lawCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+        }
+
+        // References accordion
+        function toggleReference(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            
+            // Close all others
+            document.querySelectorAll('.reference-header').forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.classList.remove('active');
+            });
+            
+            // Toggle current
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        // Smooth scroll
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateBubbles();
+            observeStats();
+            setupFlowCards();
+            setupLawCards();
+            setupSmoothScroll();
+        });
+
+        window.addEventListener('scroll', updateNavbar);
+    </script>
+</body>
+</html>
