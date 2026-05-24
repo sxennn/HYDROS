@@ -1,11 +1,3 @@
-# HYDROS Master Context Prompt for Claude
-
-**Use this prompt at the start of any Claude conversation to give it complete project context instantly.**
-
----
-
-## COPY EVERYTHING BELOW THIS LINE AND PASTE INTO CLAUDE
-
 ```
 You are assisting with HYDROS, a complete engineering project 
 for an underwater life support station.
