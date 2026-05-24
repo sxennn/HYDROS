@@ -219,6 +219,219 @@
             text-align: center;
         }
 
+        /* Animation Section */
+        .animation-section {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.05), rgba(24, 95, 165, 0.05));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .animation-canvas-container {
+            background: linear-gradient(180deg, rgba(4, 13, 24, 0.8), rgba(24, 95, 165, 0.1));
+            border: 1px solid rgba(29, 158, 117, 0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #hydrosCanvas {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(29, 158, 117, 0.3));
+        }
+
+        .animation-info {
+            background: rgba(29, 158, 117, 0.1);
+            border-left: 3px solid var(--teal);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .animation-info strong {
+            color: var(--teal);
+        }
+
+        /* Dashboard Section */
+        .dashboard-section {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.05), rgba(24, 95, 165, 0.05));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .control-panel {
+            background: linear-gradient(135deg, rgba(24, 95, 165, 0.1), rgba(29, 158, 117, 0.05));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .control-panel h3 {
+            color: var(--teal);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .control-group {
+            margin-bottom: 2rem;
+        }
+
+        .control-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .control-group .value {
+            display: inline-block;
+            background: rgba(29, 158, 117, 0.2);
+            color: var(--teal);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, rgba(29, 158, 117, 0.2), rgba(24, 95, 165, 0.2));
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--teal);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(29, 158, 117, 0.6);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--teal);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(29, 158, 117, 0.6);
+        }
+
+        .metrics-panel {
+            background: linear-gradient(135deg, rgba(29, 158, 117, 0.1), rgba(24, 95, 165, 0.1));
+            border: 1px solid rgba(29, 158, 117, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .metrics-panel h3 {
+            color: var(--teal);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(29, 158, 117, 0.05);
+            border: 1px solid rgba(29, 158, 117, 0.1);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .metric-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--light-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .dashboard-alerts {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(244, 67, 54, 0.05));
+            border: 1px solid rgba(255, 152, 0, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-alerts h3 {
+            color: #FFB74D;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            background: #FFB74D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .alert-text {
+            color: #FFD9B2;
+            font-size: 0.95rem;
+        }
+
+        .alert-text.warning {
+            color: #FFB74D;
+        }
+
+        .alert-text.ok {
+            color: var(--teal);
+        }
+
         /* Overview */
         .overview-text {
             font-size: 1.1rem;
@@ -769,6 +982,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-links {
                 gap: 1rem;
             }
@@ -781,11 +998,10 @@
         <a href="#" class="nav-logo">HYDROS</a>
         <ul class="nav-links">
             <li><a href="#overview" class="nav-link active">Overview</a></li>
+            <li><a href="#animation" class="nav-link">Animation</a></li>
+            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
             <li><a href="#flow" class="nav-link">How It Works</a></li>
             <li><a href="#specs" class="nav-link">Specs</a></li>
-            <li><a href="#components" class="nav-link">Components</a></li>
-            <li><a href="#laws" class="nav-link">Laws</a></li>
-            <li><a href="#simulations" class="nav-link">Simulations</a></li>
             <li><a href="#team" class="nav-link">Team</a></li>
         </ul>
     </nav>
@@ -836,6 +1052,104 @@
             <div class="stat-card">
                 <div class="stat-number">48.5</div>
                 <div class="stat-label">Scrubber Duration (hrs)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animation Section -->
+    <section id="animation">
+        <h2>Live System Animation</h2>
+        <div class="animation-section">
+            <div class="animation-canvas-container">
+                <canvas id="hydrosCanvas" width="800" height="600"></canvas>
+            </div>
+            <div class="animation-info">
+                <strong>Watch in real-time:</strong> Seawater flows in through the turbines (blue), oxygen is extracted by the membrane (green gas rising), CO₂ is scrubbed clean, and oxygen reaches the divers through umbilical hoses (teal flow).
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <h2>Interactive Dashboard</h2>
+        <div class="dashboard-section">
+            <div class="dashboard-grid">
+                <div class="control-panel">
+                    <h3>⚙️ System Controls</h3>
+                    
+                    <div class="control-group">
+                        <label>
+                            Current Speed
+                            <span class="value" id="speedValue">1.5 m/s</span>
+                        </label>
+                        <input type="range" id="speedSlider" min="0.5" max="3" step="0.1" value="1.5">
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            Number of Divers
+                            <span class="value" id="diverCount">6</span>
+                        </label>
+                        <input type="range" id="diverSlider" min="1" max="6" step="1" value="6">
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            Scrubber Cartridge Life
+                            <span class="value" id="scrubberValue">100%</span>
+                        </label>
+                        <input type="range" id="scrubberSlider" min="0" max="100" step="1" value="100">
+                    </div>
+                </div>
+
+                <div class="metrics-panel">
+                    <h3>📊 Real-Time Metrics</h3>
+                    
+                    <div class="metric-item">
+                        <span class="metric-label">Seawater Flow</span>
+                        <span class="metric-value" id="metricFlow">109,800</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">O₂ Extraction Rate</span>
+                        <span class="metric-value" id="metricO2">21,960</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">O₂ per Diver</span>
+                        <span class="metric-value" id="metricPerDiver">3,660</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Buffer Tank</span>
+                        <span class="metric-value" id="metricBuffer">100%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Operating Depth</span>
+                        <span class="metric-value">20 m</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">System Status</span>
+                        <span class="metric-value" id="metricStatus" style="color: var(--teal);">ONLINE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-alerts">
+                <h3>🚨 System Alerts</h3>
+                <div class="alert-item">
+                    <div class="alert-icon">✓</div>
+                    <span class="alert-text ok">All systems nominal</span>
+                </div>
+                <div class="alert-item">
+                    <div class="alert-icon">i</div>
+                    <span class="alert-text warning" id="scrubberAlert">CO₂ scrubber at 100% capacity</span>
+                </div>
+                <div class="alert-item">
+                    <div class="alert-icon">i</div>
+                    <span class="alert-text warning" id="diverAlert">6 divers consuming oxygen</span>
+                </div>
+                <div class="alert-item">
+                    <div class="alert-icon">✓</div>
+                    <span class="alert-text ok">Mooring secured (Safety Factor 113)</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1053,264 +1367,6 @@
         </table>
     </section>
 
-    <!-- Components -->
-    <section id="components">
-        <h2>9 Component Layers</h2>
-        <div class="components-grid">
-            <div class="component-card">
-                <span class="component-color" style="background-color: #fff;"></span>
-                <strong>FRAME</strong>
-                <div class="component-name">ASTM A36 Steel Cage</div>
-                <div class="component-material">Steel</div>
-                <div class="component-dimension">4.0 × 3.0 × 2.0 m</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #FFD700;"></span>
-                <strong>MEMBRANE</strong>
-                <div class="component-name">Polysulfone Hollow-Fiber</div>
-                <div class="component-material">Polysulfone</div>
-                <div class="component-dimension">700mm OD × 3000mm L</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #00C851;"></span>
-                <strong>SCRUBBER</strong>
-                <div class="component-name">CO₂ Soda Lime</div>
-                <div class="component-material">Calcium Hydroxide</div>
-                <div class="component-dimension">360mm OD × 600mm H</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #ff4081;"></span>
-                <strong>BUFFER</strong>
-                <div class="component-name">O₂ Pressure Tank</div>
-                <div class="component-material">Stainless Steel</div>
-                <div class="component-dimension">360mm OD × 2000mm L</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #ff0000;"></span>
-                <strong>MANIFOLD</strong>
-                <div class="component-name">6-Diver Distributor</div>
-                <div class="component-material">Brass/Stainless</div>
-                <div class="component-dimension">100mm header × 6×50mm ports</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #0066ff;"></span>
-                <strong>HOSE</strong>
-                <div class="component-name">Umbilical (×6)</div>
-                <div class="component-material">Reinforced Rubber</div>
-                <div class="component-dimension">50mm OD × 2400mm each</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #00ffff;"></span>
-                <strong>TURBINE</strong>
-                <div class="component-name">Axial Flow (×3)</div>
-                <div class="component-material">Aluminum/Composite</div>
-                <div class="component-dimension">760mm span × 25° pitch</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #ff6600;"></span>
-                <strong>EMERGENCY</strong>
-                <div class="component-name">Backup O₂ Tanks (×2)</div>
-                <div class="component-material">Steel</div>
-                <div class="component-dimension">160mm OD × 207 bar</div>
-            </div>
-
-            <div class="component-card">
-                <span class="component-color" style="background-color: #87CEEB;"></span>
-                <strong>BALLOON</strong>
-                <div class="component-name">Buoyancy Sphere</div>
-                <div class="component-material">Composite</div>
-                <div class="component-dimension">1700mm diameter</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Governing Laws -->
-    <section id="laws">
-        <h2>Governing Physics Laws</h2>
-        <div class="laws-grid">
-            <div class="law-card">
-                <div class="law-inner">
-                    <div class="law-front">
-                        <div class="law-name">Henry's Law</div>
-                        <div class="law-governs">Dissolved O₂ Concentration</div>
-                        <div class="law-result">7.2 mg/L at 20m depth</div>
-                    </div>
-                    <div class="law-back">
-                        <div class="law-formula">C = kH × P</div>
-                        <div class="law-governs" style="margin-top: 1rem;">Concentration proportional to partial pressure above solution</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="law-card">
-                <div class="law-inner">
-                    <div class="law-front">
-                        <div class="law-name">Fick's First Law</div>
-                        <div class="law-governs">O₂ Flux Through Membrane</div>
-                        <div class="law-result">3.47 m² area required</div>
-                    </div>
-                    <div class="law-back">
-                        <div class="law-formula">J = -D × (dC/dx)</div>
-                        <div class="law-governs" style="margin-top: 1rem;">Diffusion driven by concentration gradient</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="law-card">
-                <div class="law-inner">
-                    <div class="law-front">
-                        <div class="law-name">Dalton's Law</div>
-                        <div class="law-governs">CO₂ Partial Pressure Safety</div>
-                        <div class="law-result">pCO₂ below 500 Pa</div>
-                    </div>
-                    <div class="law-back">
-                        <div class="law-formula">P_total = ΣP_i</div>
-                        <div class="law-governs" style="margin-top: 1rem;">Total pressure = sum of individual gas pressures</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="law-card">
-                <div class="law-inner">
-                    <div class="law-front">
-                        <div class="law-name">Reynolds Number</div>
-                        <div class="law-governs">Flow Regime</div>
-                        <div class="law-result">Re = 1,006,500 (turbulent)</div>
-                    </div>
-                    <div class="law-back">
-                        <div class="law-formula">Re = ρVD/μ</div>
-                        <div class="law-governs" style="margin-top: 1rem;">Predicts laminar vs turbulent flow behavior</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="law-card">
-                <div class="law-inner">
-                    <div class="law-front">
-                        <div class="law-name">Betz's Law</div>
-                        <div class="law-governs">Turbine Power Extraction</div>
-                        <div class="law-result">1,251 W theoretical</div>
-                    </div>
-                    <div class="law-back">
-                        <div class="law-formula">P_max = 16/27 × 0.5ρAV³</div>
-                        <div class="law-governs" style="margin-top: 1rem;">Max power extractable from flowing fluid</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="law-card">
-                <div class="law-inner">
-                    <div class="law-front">
-                        <div class="law-name">Archimedes Principle</div>
-                        <div class="law-governs">Buoyancy & Mooring</div>
-                        <div class="law-result">Cord safety factor = 113</div>
-                    </div>
-                    <div class="law-back">
-                        <div class="law-formula">F_b = ρ × g × V</div>
-                        <div class="law-governs" style="margin-top: 1rem;">Buoyant force = weight of displaced fluid</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Simulations -->
-    <section id="simulations">
-        <h2>Simulation & Validation</h2>
-        <div class="sim-grid">
-            <div class="sim-card">
-                <div class="sim-title">SimScale CFD</div>
-                <div class="sim-item">
-                    <div class="sim-label">Seawater Flow Analysis</div>
-                    <div class="sim-value">RANS k-ω SST Model</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Velocity Range</div>
-                    <div class="sim-value">1.42–1.61 m/s</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Reynolds Number</div>
-                    <div class="sim-value">1,006,500 ✓</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Deviation from Manual</div>
-                    <div class="sim-value">2.3%</div>
-                </div>
-            </div>
-
-            <div class="sim-card">
-                <div class="sim-title">SimScale FEA</div>
-                <div class="sim-item">
-                    <div class="sim-label">Frame Stress Analysis</div>
-                    <div class="sim-value">Linear Static</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Maximum Stress</div>
-                    <div class="sim-value">78.1 MPa</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Safety Factor</div>
-                    <div class="sim-value">3.20</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Deviation from Manual</div>
-                    <div class="sim-value">3.7%</div>
-                </div>
-            </div>
-
-            <div class="sim-card">
-                <div class="sim-title">PhET Gas Properties</div>
-                <div class="sim-item">
-                    <div class="sim-label">O₂ Partial Pressure</div>
-                    <div class="sim-value">42,000 Pa ✓</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">CO₂ Risk</div>
-                    <div class="sim-value">Visualised & Safe</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Validation</div>
-                    <div class="sim-value">Visual Match</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Status</div>
-                    <div class="sim-value">Confirmed</div>
-                </div>
-            </div>
-
-            <div class="sim-card">
-                <div class="sim-title">PhET Buoyancy</div>
-                <div class="sim-item">
-                    <div class="sim-label">Net Upward Force</div>
-                    <div class="sim-value">2,820 N</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Mooring Safety Factor</div>
-                    <div class="sim-value">113</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Deviation from Manual</div>
-                    <div class="sim-value">0.14%</div>
-                </div>
-                <div class="sim-item">
-                    <div class="sim-label">Status</div>
-                    <div class="sim-value">Verified</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sim-banner">
-            <strong>✓ All simulations agree with manual calculations within 3.7% deviation</strong>
-        </div>
-    </section>
-
     <!-- Team -->
     <section id="team">
         <h2>The Team</h2>
@@ -1342,122 +1398,6 @@
         </div>
     </section>
 
-    <!-- References -->
-    <section>
-        <h2>References</h2>
-        <div class="references-accordion">
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Ahmed et al. (2004) — Oxygen transfer characteristics of hollow-fiber composite membranes</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Ahmed et al.</strong> (2004). Oxygen transfer characteristics of hollow-fiber composite membranes. <em>Advances in Environmental Research</em>, 8(3), 313-323.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Betz, A. (1926) — Wind-energie und ihre Ausnutzung durch Windmühlen</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Betz, A.</strong> (1926). <em>Wind-energie und ihre Ausnutzung durch Windmühlen</em>. Vandenhoeck & Ruprecht, Göttingen.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Garcia & Gordon (1992) — Oxygen solubility in seawater</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Garcia, H. E., & Gordon, L. I.</strong> (1992). Oxygen solubility in seawater: better fitting equations. <em>Limnology and Oceanography</em>, 37(6), 1307-1312.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Lee et al. (2018) — Theoretical model for underwater oxygen extraction</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Lee, S., Park, J., & Kim, H.</strong> (2018). Theoretical model for underwater oxygen extraction using hollow-fiber membranes. <em>Scientific Reports</em>, 8, 12847.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Lim et al. (2020) — CO2 absorbents in closed-circuit diving rebreathers</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Lim, P., Mitchell, S. J., & Doolette, D. J.</strong> (2020). CO₂ absorbents in closed-circuit diving rebreathers: a review. <em>Diving and Hyperbaric Medicine</em>, 50(2), 137-145.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Merckelbach et al. (2025) — Artificial gill membranes for underwater fuel cells</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Merckelbach, L. M., Wu, C., & Chen, X.</strong> (2025). Artificial gill membranes for underwater fuel cells and life support systems. <em>Advanced Science</em>, 12(1), 2400892.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Pleil et al. (2021) — The physics of human breathing</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Pleil, J. D., Stiegel, M. A., & Sobus, J. R.</strong> (2021). The physics of human breathing: ventilation, gas exchange, and respiratory mechanics. <em>Journal of Breath Research</em>, 15(4), 043001.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">Sander, S. P. (2023) — Henry's law constants for water as solvent</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Sander, S. P.</strong> (2023). Henry's law constants for water as solvent. <em>Atmospheric Chemistry and Physics</em>, 23, 10753-10806.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">White, F. M. (2011) — Fluid Mechanics, 7th Edition</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>White, F. M.</strong> (2011). <em>Fluid Mechanics</em> (7th ed.). McGraw-Hill Education.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">ASME (2019) — Boiler and Pressure Vessel Code Section VIII</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>American Society of Mechanical Engineers (ASME).</strong> (2019). <em>Boiler and Pressure Vessel Code, Section VIII: Pressure Vessels</em> (2019 Edition). ASME.
-                </div>
-            </div>
-
-            <div class="reference-item">
-                <div class="reference-header" onclick="toggleReference(this)">
-                    <span class="reference-title">WHOI (2010) — Mooring Systems Engineering Guide</span>
-                    <span class="reference-toggle">▼</span>
-                </div>
-                <div class="reference-content">
-                    <strong>Woods Hole Oceanographic Institution (WHOI).</strong> (2010). <em>Mooring Systems Engineering Guide</em>. WHOI Technical Report 10-001.
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -1474,7 +1414,290 @@
     </footer>
 
     <script>
-        // Generate bubbles
+        // ===== HYDROS ANIMATION =====
+        const canvas = document.getElementById('hydrosCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationFrame;
+        let currentSpeed = 1.5;
+        let currentDivers = 6;
+
+        class Particle {
+            constructor(x, y, vx, vy, size, color, type) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.size = size;
+                this.color = color;
+                this.type = type; // 'water', 'oxygen', 'co2', 'diver-breath'
+                this.life = 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= 0.01;
+            }
+
+            draw(ctx) {
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        const particles = [];
+
+        function drawHydrosSystem() {
+            ctx.fillStyle = '#040d18';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const time = Date.now() / 1000;
+
+            // Draw water background
+            ctx.fillStyle = 'rgba(24, 95, 165, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // ===== FRAME =====
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(centerX - 150, centerY - 180, 300, 360);
+
+            // ===== TURBINES (Left side) =====
+            ctx.save();
+            ctx.translate(centerX - 150, centerY - 80);
+            ctx.rotate(time * 3);
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.6)';
+            ctx.lineWidth = 3;
+            for (let i = 0; i < 3; i++) {
+                ctx.rotate((Math.PI * 2) / 3);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(40, 0);
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Seawater flow particles entering
+            if (Math.random() > 0.5) {
+                particles.push(new Particle(
+                    centerX - 170,
+                    centerY - 80 + (Math.random() - 0.5) * 40,
+                    3 * currentSpeed,
+                    (Math.random() - 0.5) * 1,
+                    3,
+                    'rgba(24, 95, 165, 0.8)',
+                    'water'
+                ));
+            }
+
+            // ===== MEMBRANE VESSEL (Center) =====
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.5)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, 60, 100, 0, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Oxygen extraction visualization
+            ctx.fillStyle = 'rgba(29, 158, 117, 0.2)';
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, 50, 90, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // ===== GAS RISER (Center, going up) =====
+            ctx.strokeStyle = 'rgba(29, 158, 117, 0.4)';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - 100);
+            ctx.lineTo(centerX, centerY - 160);
+            ctx.stroke();
+
+            // Oxygen particles rising
+            if (Math.random() > 0.6) {
+                particles.push(new Particle(
+                    centerX + (Math.random() - 0.5) * 20,
+                    centerY,
+                    (Math.random() - 0.5) * 1,
+                    -2,
+                    2,
+                    'rgba(29, 158, 117, 0.8)',
+                    'oxygen'
+                ));
+            }
+
+            // ===== CO2 SCRUBBER (Top center) =====
+            ctx.fillStyle = 'rgba(0, 200, 81, 0.3)';
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY - 160, 50, 30, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(0, 200, 81, 0.8)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // ===== BUFFER TANK (Right side) =====
+            ctx.fillStyle = 'rgba(255, 64, 129, 0.2)';
+            ctx.fillRect(centerX + 80, centerY - 140, 50, 80);
+            ctx.strokeStyle = 'rgba(255, 64, 129, 0.8)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(centerX + 80, centerY - 140, 50, 80);
+
+            // ===== MANIFOLD (Bottom center) =====
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.2)';
+            ctx.fillRect(centerX - 40, centerY + 100, 80, 20);
+            ctx.strokeStyle = 'rgba(255, 0, 0, 0.8)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(centerX - 40, centerY + 100, 80, 20);
+
+            // ===== DIVERS (Bottom, connected by hoses) =====
+            const diverSpacing = 280 / (currentDivers + 1);
+            for (let i = 0; i < currentDivers; i++) {
+                const diverX = centerX - 140 + (i + 1) * diverSpacing;
+                const diverY = centerY + 180;
+
+                // Hose from manifold to diver
+                ctx.strokeStyle = 'rgba(55, 138, 221, 0.6)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY + 120);
+                ctx.lineTo(diverX, diverY - 40);
+                ctx.stroke();
+
+                // Diver
+                ctx.fillStyle = 'rgba(55, 138, 221, 0.8)';
+                ctx.beginPath();
+                ctx.arc(diverX, diverY, 12, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Diver details
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(diverX, diverY - 8, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Breathing indicator
+                if (Math.random() > 0.7) {
+                    particles.push(new Particle(
+                        diverX,
+                        diverY - 20,
+                        (Math.random() - 0.5) * 2,
+                        -1.5,
+                        2,
+                        'rgba(255, 255, 255, 0.8)',
+                        'diver-breath'
+                    ));
+                }
+            }
+
+            // ===== LABELS =====
+            ctx.fillStyle = 'rgba(29, 158, 117, 0.8)';
+            ctx.font = 'bold 11px "IBM Plex Mono"';
+            ctx.textAlign = 'center';
+            ctx.fillText('TURBINES', centerX - 150, centerY - 110);
+            ctx.fillText('MEMBRANE', centerX, centerY - 120);
+            ctx.fillText('SCRUBBER', centerX, centerY - 195);
+            ctx.fillText('BUFFER', centerX + 105, centerY - 150);
+            ctx.fillText('MANIFOLD', centerX, centerY + 135);
+
+            // Update and draw particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw(ctx);
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            // Draw info overlay
+            ctx.fillStyle = 'rgba(29, 158, 117, 0.8)';
+            ctx.font = '12px "IBM Plex Mono"';
+            ctx.textAlign = 'left';
+            ctx.fillText(`Flow: ${(109800 * (currentSpeed / 1.5)).toFixed(0)} L/min`, 20, 30);
+            ctx.fillText(`Divers: ${currentDivers}`, 20, 50);
+            ctx.fillText(`O₂ Extraction: ${(21960 * (currentSpeed / 1.5)).toFixed(0)} L/min`, 20, 70);
+
+            animationFrame = requestAnimationFrame(drawHydrosSystem);
+        }
+
+        drawHydrosSystem();
+
+        // ===== DASHBOARD LOGIC =====
+        const speedSlider = document.getElementById('speedSlider');
+        const diverSlider = document.getElementById('diverSlider');
+        const scrubberSlider = document.getElementById('scrubberSlider');
+
+        speedSlider.addEventListener('input', (e) => {
+            currentSpeed = parseFloat(e.target.value);
+            document.getElementById('speedValue').textContent = currentSpeed.toFixed(1) + ' m/s';
+            updateMetrics();
+        });
+
+        diverSlider.addEventListener('input', (e) => {
+            currentDivers = parseInt(e.target.value);
+            document.getElementById('diverCount').textContent = currentDivers;
+            document.getElementById('diverAlert').textContent = `${currentDivers} diver${currentDivers !== 1 ? 's' : ''} consuming oxygen`;
+            updateMetrics();
+        });
+
+        scrubberSlider.addEventListener('input', (e) => {
+            const percentage = parseInt(e.target.value);
+            document.getElementById('scrubberValue').textContent = percentage + '%';
+            if (percentage < 20) {
+                document.getElementById('scrubberAlert').textContent = '⚠️ CO₂ scrubber needs replacement soon!';
+            } else if (percentage < 50) {
+                document.getElementById('scrubberAlert').textContent = '⚠️ CO₂ scrubber at ' + percentage + '% capacity';
+            } else {
+                document.getElementById('scrubberAlert').textContent = 'CO₂ scrubber at ' + percentage + '% capacity';
+            }
+        });
+
+        function updateMetrics() {
+            const baseFlow = 109800;
+            const flowAdjusted = baseFlow * (currentSpeed / 1.5);
+            const o2Extraction = 21960 * (currentSpeed / 1.5);
+            const perDiver = (o2Extraction / currentDivers);
+
+            document.getElementById('metricFlow').textContent = Math.round(flowAdjusted).toLocaleString();
+            document.getElementById('metricO2').textContent = Math.round(o2Extraction).toLocaleString();
+            document.getElementById('metricPerDiver').textContent = Math.round(perDiver).toLocaleString();
+
+            const bufferLevel = Math.max(0, 100 - (currentDivers - 6) * 10);
+            document.getElementById('metricBuffer').textContent = Math.max(0, bufferLevel).toFixed(0) + '%';
+
+            if (bufferLevel < 30) {
+                document.getElementById('metricStatus').textContent = '⚠️ WARNING';
+                document.getElementById('metricStatus').style.color = '#FFB74D';
+            } else {
+                document.getElementById('metricStatus').textContent = 'ONLINE';
+                document.getElementById('metricStatus').style.color = 'var(--teal)';
+            }
+        }
+
+        // ===== NAVBAR SCROLL =====
+        function updateNavbar() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const id = section.getAttribute('id');
+                
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // ===== BUBBLES =====
         function generateBubbles() {
             const container = document.getElementById('bubble-container');
             const bubbleCount = 20;
@@ -1495,115 +1718,7 @@
             }
         }
 
-        // Navbar scroll detection
-        function updateNavbar() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section');
-            
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const id = section.getAttribute('id');
-                
-                if (rect.top <= 100 && rect.bottom >= 100) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        // Animate stat counters
-        function animateCounter(element, target) {
-            const duration = 2000;
-            const start = Date.now();
-            
-            function update() {
-                const elapsed = Date.now() - start;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                let value = target * progress;
-                
-                // Format with commas
-                if (target > 100) {
-                    value = Math.floor(value);
-                    element.textContent = value.toLocaleString();
-                } else {
-                    value = (value).toFixed(1);
-                    element.textContent = value;
-                }
-                
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
-            }
-            
-            update();
-        }
-
-        // Intersection observer for stat animations
-        function observeStats() {
-            const statCards = document.querySelectorAll('.stat-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !entry.target.dataset.animated) {
-                        const numberElement = entry.target.querySelector('.stat-number');
-                        const text = numberElement.textContent.replace(/,/g, '');
-                        let target = parseFloat(text);
-                        
-                        animateCounter(numberElement, target);
-                        entry.target.dataset.animated = 'true';
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            statCards.forEach(card => observer.observe(card));
-        }
-
-        // Flow card expand/collapse
-        function setupFlowCards() {
-            const flowCards = document.querySelectorAll('.flow-card');
-            
-            flowCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.classList.toggle('expanded');
-                });
-            });
-        }
-
-        // Law card flip
-        function setupLawCards() {
-            const lawCards = document.querySelectorAll('.law-card');
-            
-            lawCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.classList.toggle('flipped');
-                });
-            });
-        }
-
-        // References accordion
-        function toggleReference(header) {
-            const content = header.nextElementSibling;
-            const isActive = header.classList.contains('active');
-            
-            // Close all others
-            document.querySelectorAll('.reference-header').forEach(h => {
-                h.classList.remove('active');
-                h.nextElementSibling.classList.remove('active');
-            });
-            
-            // Toggle current
-            if (!isActive) {
-                header.classList.add('active');
-                content.classList.add('active');
-            }
-        }
-
-        // Smooth scroll
+        // ===== SMOOTH SCROLL =====
         function setupSmoothScroll() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -1618,12 +1733,9 @@
             });
         }
 
-        // Initialize
+        // ===== INITIALIZE =====
         document.addEventListener('DOMContentLoaded', function() {
             generateBubbles();
-            observeStats();
-            setupFlowCards();
-            setupLawCards();
             setupSmoothScroll();
         });
 
